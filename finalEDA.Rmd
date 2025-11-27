@@ -1,7 +1,7 @@
 ---
 title: "Final Project EDA"
-author: "Jackson Gasperack"
-date: "2025-11-17"
+author: "Jackson Gasperack & Sawan Pandita"
+date: "2025-11-26"
 format:
   pdf:
     toc: true
