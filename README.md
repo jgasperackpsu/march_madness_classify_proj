@@ -29,6 +29,12 @@ The main file, cbb.csv, contains information on every Division I basketball team
 <br>
 We used subset selection to see which group of these variables would be the best feature set to predict a postseason of F4. 
 
+## Findings
+
+![](xgb_25_preds.png)
+<br>
+These are the teams that our model predicted would make the final four because their probability to make it is greater than our threshold. From the actual bracket, three of the top four teams are correctly predicted with the winner being the highest probability. Then, the actual fourth team was the 8th highest probability from our model and every other team predicted that didn't actually make the final four was beaten by another predicted team somewhere in the bracket.
+
 ## Works Cited
 
 Dataset from Andrew Sundberg on Kaggle: https://www.kaggle.com/datasets/andrewsundberg/college-basketball-dataset
