@@ -2,7 +2,7 @@
 ## By Jackson Gasperack and Sawan Pandita
 
 <br>
-This repository is exploring different staistics of Men's Basketball Division I teams from the years 2013 to 2025. The data files include information on 12 individual years of statistics and how the teams panned out for those years. There is a larger datatset that includes all teams from all years and those statistics as well, just a binded version of all the individual files.
+This repository is exploring different statistics of Men's Basketball Division I teams from the years 2013 to 2025. The data files include information on 12 individual years of statistics and how the teams panned out for those years. There is a larger datatset that includes all teams from all years and those statistics as well, just a binded version of all the individual files.
 <br>
 
 ## Overview
@@ -28,6 +28,12 @@ The main file, cbb.csv, contains information on every Division I basketball team
 **YEAR** - Year<br>
 <br>
 We used subset selection to see which group of these variables would be the best feature set to predict a postseason of F4. 
+
+## Findings
+
+![](xgb_25_preds.png)<br>
+<br>
+These are the teams that our model predicted would make the final four because their probability to make it is greater than our threshold. From the actual bracket, three of the top four teams are correctly predicted with the winner being the highest probability. Then, the actual fourth team was the 8th highest probability from our model and every other team predicted that didn't actually make the final four was beaten by another predicted team somewhere in the bracket. More about are findings is stored in our presentation and report PDF files.
 
 ## Works Cited
 
