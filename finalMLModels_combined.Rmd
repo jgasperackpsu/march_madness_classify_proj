@@ -486,7 +486,7 @@ for(i in seq_along(thresholds)){
   precision_xgb <- ifelse((TP + FP) > 0, TP/(TP+FP), 0)
   recall_xgb <- ifelse((TP + FN) > 0, TP/(TP+FN), 0)
   f1_vec_XGB[i] <- ifelse((precision_xgb + recall_xgb) > 0, 
-                          2 * precision_xgb * recall_xgb / (precision_xgb + recall_xgb), 0)
+                      2 * precision_xgb * recall_xgb / (precision_xgb + recall_xgb), 0)
 }
 
 best_index_XGB <- which.max(f1_vec_XGB)
@@ -719,35 +719,48 @@ cbb25_test <- cbb25 %>%
 # better
 xgb_test_25 <- model.matrix(~ . - 1, data = cbb25_test[, features_RF])
 
-probs_2025 <- predict(xgb_model, newdata = xgb_test_25)
-pred_2025 <- ifelse(probs_2025 > thresholds[best_index_RF], 1, 0)
+probs_2025_xgb <- predict(xgb_model, newdata = xgb_test_25)
+pred_2025_xgb <- ifelse(probs_2025_xgb > thresholds[best_index_XGB], 1, 0)
 
 ## RANDOMFOREST PREDS
-#probs_2025 <- predict(rf_model, newdata = cbb25_test, type = "prob")[,2]
-#pred_2025 <- ifelse(probs_2025 > thresholds[best_index_RF], 1, 0)
+probs_2025_rf <- predict(rf_model, newdata = cbb25_test, type = "prob")[,2]
+pred_2025_rf <- ifelse(probs_2025_rf > thresholds[best_index_RF], 1, 0)
 
 for(i in seq_along(probs_2025)){
-  names(probs_2025) <- cbb25_test$Team
+  names(probs_2025_xgb) <- cbb25_test$Team
 }
 
-predictions <- data.frame(
-  probs = probs_2025,
-  preds = pred_2025,
+for(i in seq_along(probs_2025)){
+  names(probs_2025_rf) <- cbb25_test$Team
+}
+
+predictions_xgb <- data.frame(
+  probs = probs_2025_xgb,
+  preds = pred_2025_xgb,
   Team = cbb25_test$Team
 ) %>%
   arrange(desc(probs))
 
-predictedFinalFours <- predictions %>%
+predictions_rf <- data.frame(
+  probs = probs_2025_rf,
+  preds = pred_2025_rf,
+  Team = cbb25_test$Team
+) %>%
+  arrange(desc(probs))
+
+predictedFinalFours_xgb <- predictions_xgb %>%
   filter(preds == 1) %>%
   mutate(probs = round(probs,2)) %>%
   arrange(desc(probs))
 
-top4Teams <- predictions %>%
-  top_n(4, probs)
+predictedFinalFours_rf <- predictions_rf %>%
+  filter(preds == 1) %>%
+  mutate(probs = round(probs,2)) %>%
+  arrange(desc(probs))
 
 ## Plot Top 4 teams and 4 honorable mentions
 ggplot(
-  data = predictedFinalFours,
+  data = predictedFinalFours_xgb,
   mapping = aes(x = reorder(Team, -probs), y = probs)
 ) +
   geom_col(color = "black", fill = "skyblue") +
@@ -755,12 +768,35 @@ ggplot(
             vjust = -0.3, size = 3)+
   scale_y_continuous(limits = c(0,1)) +
   labs(title = "Teams and Their Probability to Make the Final Four",
+       subtitle = "XGBoost Model",
        x = "Team",
        y = "Probability") +
   theme_bw() +
   theme(plot.title = element_text(face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(face = "bold", hjust = 0.5),
+        axis.title = element_text(face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(
+  data = predictedFinalFours_rf,
+  mapping = aes(x = reorder(Team, -probs), y = probs)
+) +
+  geom_col(color = "black", fill = "skyblue") +
+  geom_text(aes(label = probs),
+            vjust = -0.3, size = 3)+
+  scale_y_continuous(limits = c(0,1)) +
+  labs(title = "Teams and Their Probability to Make the Final Four",
+       subtitle = "RandomForest Model",
+       x = "Team",
+       y = "Probability") +
+  theme_bw() +
+  theme(plot.title = element_text(face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(face = "bold", hjust = 0.5),
         axis.title = element_text(face = "bold"),
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
+```{r}
+save.image(file = "EDA.RData")
+```
