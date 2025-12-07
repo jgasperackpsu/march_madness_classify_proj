@@ -171,8 +171,6 @@ ggplot(
         legend.title = element_text(face = "bold", hjust = 0.5))
 ```
 
-\newpage
-
 # Feature Selection
 
 In order to choose the best set of features, we ran three different
@@ -429,3 +427,29 @@ https://www.ncaa.com/basketball-men/d1/every-ncaa-bracket-1939-today-
         tournament-stats-records
 
 ## R Packages
+
+```{r}
+#| label: packageCitations
+#| warning: false
+packages <- c("tidyverse","ggplot2","caret","glmnet","randomForest","FNN","pROC","nnet","PRROC","xgboost","Matrix","e1071")
+
+citings <- rep(NA, length(packages))
+
+for (i in seq_along(packages)){
+  citings[i] <- citation(packages[[i]])
+}
+
+wrap <- function(x, width = 80) {
+  paste(str_wrap(x, width = width), collapse = "\n")
+}
+
+for (i in seq_along(packages)){
+  cat("-----",packages[[i]],"-----\n")
+  for (entry_index in seq_along(citings[[i]])){
+    cat(wrap(toString(citings[[i]][[entry_index]])))
+    cat(".\n")
+  }
+  cat("\n\n")
+}
+```
+
