@@ -2,7 +2,7 @@
 ## By Jackson Gasperack and Sawan Pandita
 
 <br>
-This repository is exploring different statistics of Men's Basketball Division I teams from the years 2013 to 2025. The data files include information on 12 individual years of statistics and how the teams panned out for those years. There is a larger datatset that includes all teams from all years and those statistics as well, just a binded version of all the individual files.
+This repository is exploring different statistics of Men's Basketball Division I teams from the years 2013 to 2025. The data files include information on 12 individual years of statistics and how the teams panned out for those years. There is a larger datatset that includes all teams from all years and those statistics as well, just a binded version of all the individual files. We wanted to see if it was possible to accurately predict the Final Four teams of March Madness in a given year.
 <br>
 
 ## Overview
@@ -31,13 +31,23 @@ We used subset selection to see which group of these variables would be the best
 
 ## Findings
 
-![](xgb_25_preds.png)<br>
+![](xgb_25pred.png)<br>
 <br>
 These are the teams that our model predicted would make the final four because their probability to make it is greater than our threshold. From the actual bracket, three of the top four teams are correctly predicted with the winner being the highest probability. Then, the actual fourth team was the 8th highest probability from our model and every other team predicted that didn't actually make the final four was beaten by another predicted team somewhere in the bracket. More about our findings is stored in our presentation and report PDF files.
 
 ## Works Cited
 
 Dataset from Andrew Sundberg on Kaggle: https://www.kaggle.com/datasets/andrewsundberg/college-basketball-dataset
+
+Sources:
+
+NCAA. (2025, April 15). Browse every NCAA bracket since 1939 with stat and records. NCAA. https://www.ncaa.com/basketball-men/d1/every-ncaa-bracket-1939-today-tournament-stats-records
+
+Paine, N., & Voice, J. (2017, March 14). The odds you’ll fill out a perfect bracket. FiveThirtyEight. https://fivethirtyeight.com/features/the-odds-youll-fill-out-a-perfect-bracket/
+
+Wilco, D. (2018, November 11). Nine Years of College Basketball Data Show Offense Matters More in March. NCAA. https://www.ncaa.com/news/basketball-men/article/2018-11-10/nine years-college-basketball-data-show-offense-matters-more
+
+R Packages cited in PDF
 
 ## Authors
 
