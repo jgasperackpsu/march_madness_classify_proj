@@ -242,8 +242,7 @@ better with an AIC of 209.16. So, the feature set that gave us the best
 AIC is:\newline \newline - **Wins**\newline - **Adjusted Offensive
 Efficiency**\newline - **Adjusted Defensive Efficiency**\newline -
 **Two-point rate**\newline - **Two-point rate allowed**\newline -
-**Turnover rate**\newline - **Steal rate**\newline - **Free Throw
-rate**\newline
+**Turnover rate**\newline - **Steal rate**\newline - **Free Throw rate**\newline
 
 This Logistic Regression model is not included in any model evaluations
 as it performed worse than our baseline model which you will later see
