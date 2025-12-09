@@ -18,7 +18,7 @@ editor:
 ```{r}
 #| label: loadData
 #| include: false
-load(file = "EDA.RData")
+load(file = "Models.RData")
 ```
 
 ```{r setup, include=FALSE}
@@ -398,15 +398,15 @@ legend("bottomright",
 ```
 
 -   **XGBoost (Purple Line)**: Performed the best with an AUC of
-    *0.963*, hugging the top-left corner the tightest.
+    *0.96*, hugging the top-left corner the tightest.
 -   **Random Forest (Blue Line)**: A close second with an AUC of
-    *0.939*.
+    *0.94*.
 -   **Neural Network (Green Line)**: Performed well with an AUC of
-    *0.772*.
+    *0.71*.
 -   **SVM (Orange Line)**: Showed a "blocky" step function with an AUC
-    of *0.772*, indicating less granular probability estimates.
+    of *0.77*, indicating less granular probability estimates.
 -   **kNN (Red Line)**: Performed poorly, falling below the diagonal
-    line with an AUC of *0.339* which performs worse than random
+    line with an AUC of *0.34* which performs worse than random
     guessing of 0.5.
 
 ```{r}

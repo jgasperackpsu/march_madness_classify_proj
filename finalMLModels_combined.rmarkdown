@@ -505,26 +505,6 @@ importance_matrix <- xgb.importance(colnames(dtrain), model = xgb_model)
 xgb.plot.importance(importance_matrix, top_n = 10, main = "XGBoost Feature Importance")
 ```
 
-```{r}
-#| label: thresholdVSF1_XGB
-
-f1_threshold_XGB_df <- data.frame(
-  threshold=thresholds,
-  f1=f1_vec_XGB
-)
-
-ggplot(data = f1_threshold_XGB_df, mapping = aes(x = threshold, y = f1)) +
-  geom_point(alpha = 0.8, color = "purple") +
-  labs(title = "F1 Score vs. Threshold",
-       subtitle = "F1 = (2*Recall*Precision)/(Recall + Precision)",
-       x = "Threshold for Gradient Boosting Model",
-       y = "F1 Score") +
-  theme_bw() +
-  theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 14),
-        plot.subtitle = element_text(face = "italic", hjust = 0.5, size = 10),
-        axis.title = element_text(face = "bold")
-        )
-```
 
 ```{r}
 #| label: svmModel
@@ -567,26 +547,7 @@ acc_SVM <- mean(pred_best_SVM == as.numeric(test_RF$isFinalFour) - 1)
 print(paste("My Best SVM F1 Score:", max(f1_vec_SVM)))
 ```
 
-```{r}
-#| label: thresholdVSF1_SVM
 
-f1_threshold_SVM_df <- data.frame(
-  threshold=thresholds,
-  f1=f1_vec_SVM
-)
-
-ggplot(data = f1_threshold_SVM_df, mapping = aes(x = threshold, y = f1)) +
-  geom_point(alpha = 0.8, color = "orange") +
-  labs(title = "F1 Score vs. Threshold",
-       subtitle = "F1 = (2*Recall*Precision)/(Recall + Precision)",
-       x = "Threshold for Support Vector Model",
-       y = "F1 Score") +
-  theme_bw() +
-  theme(plot.title = element_text(face = "bold", hjust = 0.5, size = 14),
-        plot.subtitle = element_text(face = "italic", hjust = 0.5, size = 10),
-        axis.title = element_text(face = "bold")
-        )
-```
 
 
 ## Model Comparison
